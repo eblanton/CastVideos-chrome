@@ -867,18 +867,19 @@ CastPlayer.prototype.updateMediaControlUI = function() {
   if( !this.receivers_available ) {
     document.getElementById("casticonactive").style.display = 'none';
     document.getElementById("casticonidle").style.display = 'none';
-    return; 
-  }
-
-  if( this.deviceState == DEVICE_STATE.ACTIVE ) {
-    document.getElementById("casticonactive").style.display = 'block';
-    document.getElementById("casticonidle").style.display = 'none';
-    var playerState = this.castPlayerState;
+    var playerState = this.localPlayerState;
   }
   else {
-    document.getElementById("casticonidle").style.display = 'block';
-    document.getElementById("casticonactive").style.display = 'none';
-    var playerState = this.localPlayerState;
+    if( this.deviceState == DEVICE_STATE.ACTIVE ) {
+      document.getElementById("casticonactive").style.display = 'block';
+      document.getElementById("casticonidle").style.display = 'none';
+      var playerState = this.castPlayerState;
+    }
+    else {
+      document.getElementById("casticonidle").style.display = 'block';
+      document.getElementById("casticonactive").style.display = 'none';
+      var playerState = this.localPlayerState;
+    }
   }
 
   switch( playerState ) 
